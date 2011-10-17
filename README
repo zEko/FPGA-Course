@@ -1,0 +1,10 @@
+
+Some of the codes that needs to be tested on a FPGA as a part of a course.
+
+It includes a :
+
+MATLAB/Octave file : octave.m
+Verilog file : rgb2y.v
+Shell Script : scrape.sh
+
+The shell script was written to write out all values of hex obtained from MATLAB output to verilog assign statements ( Need to find a better way out ).
