@@ -1,0 +1,28 @@
+#!/bin/sh
+
+_filename="$1"
+_rows="$2"
+_columns="$3"
+_delimiter="$4"
+
+#${_filename?'File does not exist'}
+#${_rows?'Require row Value.I am no AI supported to predict values'}
+COUNTER=0
+
+for ((row=1; row<=${_rows}; row++))
+    do
+    echo column:${row}
+    for ((column=1; column<=${_columns}; column++))
+	do
+	echo row: ${column}
+	val=$(cat ${_filename} | head -n ${row} | cut -d ${_delimiter} -f ${column} | tail -n 1)
+	echo val: ${val}
+	echo assign r1[$COUNTER] = $val >> ${_filename}.done
+	COUNTER=$(($COUNTER+1))
+    done
+done
+
+mv ${_filename}.done scraped/
+echo 'Scraped data in scraped directory'
+
+

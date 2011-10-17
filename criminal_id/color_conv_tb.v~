@@ -1,0 +1,45 @@
+// Test bench for rgb2yuv 
+
+module verilog_tb;
+
+   //Define all inputs as registers
+   reg rst ;
+   
+   reg clk;
+   reg [7:0] R_t ;
+   reg [7:0] G_t ;
+   reg [7:0] B_t ;
+
+   //Define all outputs as wires
+   wire [7:0] Y_t;
+
+   //Instantiate the color_conv module
+   rgb2y rgb2y_test(.rst(rst), .R(R_t), .G(G_t), .B(B_t), .Y(Y_t));
+      
+   initial begin
+//      $dumpfile("test.vcd");
+//      $dumpvars(0,test);
+      $monitor(rst, R_t, G_t, B_t, Y_t);
+      
+      #10 rst = 1;
+      R_t = 256;
+      G_t = 123;
+      B_t = 124;
+      
+      #20 rst = 0;
+
+      #90 rst = 1;
+      R_t = 55;
+      G_t = 13;
+      B_t = 24;
+            
+      #100 $stop;
+   end
+
+   always #5 clk = !clk;
+
+endmodule // verilog_tb
+
+  
+      
+  
